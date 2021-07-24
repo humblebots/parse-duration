@@ -58,15 +58,17 @@ parse.y = parse.d * 365.25
  */
 
 function parse(str='', format='ms'){
-  var result = null
+  let results = [];
   // ignore commas/placeholders
   str = (str+'').replace(/(\d)[,_](\d)/g, '$1$2')
   str.replace(durationRE, function(_, n, units){
     units = unitRatio(units)
-    if (units) result = (result || 0) + parseFloat(n, 10) * units
+    if (units) {
+      results.push(parseFloat(n, 10) * units);
+    }
   })
 
-  return result && (result / (unitRatio(format) || 1))
+  return results.map((result) => result / (unitRatio(format) || 1));
 }
 
 function unitRatio(str) {

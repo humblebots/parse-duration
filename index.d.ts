@@ -15,4 +15,4 @@ type Units =
   'month' | 'b' |
   'year' | 'yr' | 'y'
 
-export default function parse (str: string, format?: Units): number | null
+export default function parse (str: string, format?: Units): number[]
